@@ -1,0 +1,44 @@
+{% extends 'projects/base_proyectos.html' %}
+
+{% block content %}
+    <h2>Mis proyectos</h2>
+
+    {% if mis_proyectos %}
+    <ul>
+        {% for p in mis_proyectos %}
+        <li>
+            <a href="{% url 'project_detail' p.id %}" class="url-project">
+                {{ p.title }}
+            </a>
+            <!--<form action="{% url 'delete_project' p.id %}" method="post" style="display:inline;"
+                onsubmit="return confirm('¿Estás seguro de que quieres eliminar este proyecto?');">
+                {% csrf_token %}
+                <button type="submit"
+                    style="color: red; border: none; background: none; cursor: pointer; padding: 0; font-size: 0.8em; margin-left: 10px;">[Eliminar]</button> 
+            </form>-->
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No tienes proyectos propios todavía.</p>
+    {% endif %}
+
+    <hr>
+
+    <h2>Colaboraciones</h2>
+
+    {% if proyectos_colaborativos %}
+    <ul>
+        {% for c in proyectos_colaborativos %}
+        <li>
+            <a href="{% url 'project_detail' c.id %}" class="url-project">
+                {{ c.title }}
+            </a>
+            <span class="owner-project">(Owner: {{ c.owner.username }})</span>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No colaboras en ningún proyecto.</p>
+    {% endif %}
+{% endblock %}
