@@ -32,7 +32,7 @@
         <li style="margin-bottom: 10px;">
             {{ task.title }} - <strong>{{ task.get_status_display }}</strong>
             {% if user in project.collaborators.all %}
-                <a href="{% url 'edit_task_status' task.id %}" style="margin-left: 10px; font-size: 0.8em; color: var(--primary);">Cambiar estado</a>
+                <a href="{% url 'edit_task_status' task.id %}" style="margin-left: 10px; font-size: 0.8em; color: var(--primary);">Cambiar estado</a> <!-- TODO: CAMBIAR ESTILO -->
             {% endif %}
         </li>
         {% empty %}
@@ -40,7 +40,7 @@
         {% endfor %}
     </ul>
 
-    <h3>Gráfico de tareas completadas</h3>
+    <h2>Gráfico de tareas completadas</h2>
     {% if project.tasks.exists %}
     <div style="max-width: 200px; margin: 20px auto; text-align: center;">
         <canvas id="tasksChart"></canvas>
