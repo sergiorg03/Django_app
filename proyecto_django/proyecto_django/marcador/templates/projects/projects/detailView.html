@@ -31,11 +31,14 @@
     {% for task in project.tasks.all %}
     <li style="margin-bottom: 10px;">
         {{ task.title }} - <strong>{{ task.get_status_display }}</strong>
-        {% if user in project.collaborators.all %}
-        <a href="{% url 'edit_task_status' task.id %}"
-            style="margin-left: 10px; font-size: 0.8em; color: var(--primary);">Cambiar estado</a>
-        <!-- TODO: CAMBIAR ESTILO -->
-        {% endif %}
+        {% if user == project.owner or user in project.collaborators.all %}
+        <form action="{% url 'edit_task_status' task.id %}" method="get"
+            style="display: inline-block; margin-left: 10px;">
+            <button type="submit">
+                Cambiar estado
+            </button>
+        </form>
+        {% endif %} 
     </li>
     {% empty %}
     <li>No hay tareas</li>
