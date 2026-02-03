@@ -38,7 +38,7 @@
                 Cambiar estado
             </button>
         </form>
-        {% endif %} 
+        {% endif %}
     </li>
     {% empty %}
     <li>No hay tareas</li>
@@ -52,7 +52,6 @@
     <p style="margin-top: 15px; font-weight: 600; ">Progreso: {{ porcentaje_completado }}%</p>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const ctx = document.getElementById('tasksChart').getContext('2d');
