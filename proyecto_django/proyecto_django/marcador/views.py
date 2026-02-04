@@ -85,8 +85,8 @@ def edit_task_status(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     project = task.project
     
-    # Verificar si el usuario es colaborador
-    if request.user not in project.collaborators.all():
+    # Verificar si el usuario es el dueño o colaborador
+    if request.user != project.owner and request.user not in project.collaborators.all():
         return redirect('detail_view', project_id=project.id)
     
     if request.method == 'POST':

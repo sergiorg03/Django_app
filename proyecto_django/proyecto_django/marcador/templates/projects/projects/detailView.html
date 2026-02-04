@@ -34,56 +34,69 @@
         {% if user == project.owner or user in project.collaborators.all %}
         <form action="{% url 'edit_task_status' task.id %}" method="get"
             style="display: inline-block; margin-left: 10px;">
-            <button type="submit">
+            <button type="submit" class="delete-project-button" style="padding: 0.4em 0.8em; font-size: 14px;">
                 Cambiar estado
             </button>
         </form>
         {% endif %}
     </li>
     {% empty %}
-    <li>No hay tareas</li>
+    <li style="list-style: none; opacity: 0.6;">No hay tareas</li>
     {% endfor %}
 </ul>
 
 <h2>Gráfico de tareas completadas</h2>
 {% if project.tasks.exists %}
 <div style="max-width: 200px; margin: 20px auto; text-align: center;">
-    <canvas id="tasksChart"></canvas>
+    <canvas id="tasksChart" data-completadas="{{ completadas }}" data-pendientes="{{ pendientes }}"></canvas>
     <p style="margin-top: 15px; font-weight: 600; ">Progreso: {{ porcentaje_completado }}%</p>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const ctx = document.getElementById('tasksChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Completadas', 'Pendientes '],
-                datasets: [{
-                    data: [{{ completadas }}, {{ pendientes }}],
-            backgroundColor: ['#90f0c8', '#ff4d4d'],
-            borderColor: 'transparent',
-        }]
-                },
+        // Obtener los datos
+        const canvas = document.getElementById('tasksChart');
+        const completadas = parseInt(canvas.dataset.completadas);
+        const pendientes = parseInt(canvas.dataset.pendientes);
+        
+        // Llamar a la función init_chart()
+        init_chart(completadas, pendientes);
+    });
+</script>
+
+<script>
+    // Codigo para el gráfico de tarta (PieChart)
+function init_chart(completadas, pendientes) {
+    const ctx = document.getElementById('tasksChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Completadas', 'Pendientes'],
+            datasets: [{
+                data: [completadas, pendientes],
+                backgroundColor: ['#90f0c8', '#ff4d4d'],
+                borderColor: 'transparent',
+            }]
+        },
         options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-                labels: {
-                    color: 'white',
-                    boxWidth: 20,
-                    padding: 20,
-                    font: {
-                        size: 12,
-                        family: "'Courier New', Courier, monospace"
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: 'white',
+                        boxWidth: 20,
+                        padding: 20,
+                        font: {
+                            size: 12,
+                            family: "'Courier New', Courier, monospace"
+                        }
                     }
                 }
             }
         }
-    }
-            });
-        });
+    });
+}
 </script>
 {% endif %}
 
