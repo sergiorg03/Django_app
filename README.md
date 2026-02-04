@@ -1,6 +1,6 @@
 # Gestor de Proyectos y Tareas (Django)
 
-Este proyecto es una aplicación web robusta construida con **Django 6.x** para la gestión de proyectos y tareas. Permite a los usuarios realizar un seguimiento detallado del estado y la prioridad de las tareas asociadas.
+Este proyecto es una aplicación web construida con **Django 6.x** para la gestión de proyectos y tareas. Permite a los usuarios realizar un seguimiento detallado del estado y la prioridad de las tareas asociadas.
 
 ## 🚀 Características Principales
 
@@ -74,12 +74,3 @@ Este proyecto es una aplicación web robusta construida con **Django 6.x** para 
 - `marcador/`: Aplicación principal que contiene la lógica de proyectos y tareas.
 - `mysite/`: Configuración global del proyecto Django.
 - `staticfiles/`: Directorio donde se recopilan los archivos estáticos para producción.
-- `DESPLIEGUE_RENDER.md`: Guía detallada para el despliegue en Render.
-
-## 🤝 Contribución
-
-Si deseas contribuir a este proyecto, por favor abre un *Issue* o envía un *Pull Request*.
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT.
