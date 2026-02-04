@@ -34,7 +34,7 @@
         {% if user == project.owner or user in project.collaborators.all %}
         <form action="{% url 'edit_task_status' task.id %}" method="get"
             style="display: inline-block; margin-left: 10px;">
-            <button type="submit" class="delete-project-button" style="padding: 0.4em 0.8em; font-size: 14px;">
+            <button type="submit" class="change-state" style="padding: 0.4em 0.8em; font-size: 14px;">
                 Cambiar estado
             </button>
         </form>
